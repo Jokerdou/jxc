@@ -116,4 +116,16 @@
       </if>
     </where>
   </select>
+
+  <!--批量删除-->
+  <delete id="deleteBatch">
+    delete from
+        t_supplier
+    where
+        supplier_id
+    in
+    <foreach collection="array" separator="," open="(" close=")" item="supplierId">
+      #{supplierId}
+    </foreach>
+  </delete>
 </mapper>
