@@ -177,12 +177,12 @@
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-gears"></i><span
-                                class="layui-left-nav"> 供应商管理</span> <span class="layui-nav-more"></span></a>
+                                class="layui-left-nav">基础资料</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
-                               data-tab="data_dic/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 客户管理</span></a>
+                               data-tab="supplier/index" target="_self"><i class="fa fa-tachometer"></i><span
+                                        class="layui-left-nav"> 供应商管理</span></a>
                         </dd>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11"

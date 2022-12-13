@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.erp.dao.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.xxxx.erp.vo.Supplier" >
+    <id column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    supplier_id, supplier_name, contacts, phone_number, address, remarks
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xxxx.erp.vo.Supplier" >
+    insert into t_supplier (supplier_id, supplier_name, contacts, 
+      phone_number, address, remarks
+      )
+    values (#{supplierId,jdbcType=INTEGER}, #{supplierName,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xxxx.erp.vo.Supplier" >
+    insert into t_supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="supplierName != null" >
+        supplier_name,
+      </if>
+      <if test="contacts != null" >
+        contacts,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierName != null" >
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.erp.vo.Supplier" >
+    update t_supplier
+    <set >
+      <if test="supplierName != null" >
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null" >
+        contacts = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xxxx.erp.vo.Supplier" >
+    update t_supplier
+    set supplier_name = #{supplierName,jdbcType=VARCHAR},
+      contacts = #{contacts,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 多条件查询 -->
+  <select id="selectByParams" parameterType="com.xxxx.erp.query.SupplierQuery" resultType="com.xxxx.erp.vo.Supplier">
+    select
+        <include refid="Base_Column_List"/>
+    from
+         t_supplier
+    <where>
+      <if test="supplierName != null and supplierName != ''">
+        and supplier_name like concat('%',#{supplierName},'%')
+      </if>
+    </where>
+  </select>
+</mapper>
