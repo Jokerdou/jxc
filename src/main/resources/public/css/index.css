@@ -1,0 +1,54 @@
+html, body {width: 100%;height: 100%;overflow: hidden}
+body {background: black;transition: all 3s}
+body:after {content:'';background-repeat:no-repeat;background-size:cover;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;
+}
+.layui-container {width: 100%;height: 100%;overflow: hidden; background: #000000;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.admin-login-background {width:360px;height:300px;position:absolute;left:50%;top:40%;margin-left:-180px;margin-top:-100px;}
+.logo-title {text-align:center;letter-spacing:2px;padding:14px 0;}
+.logo-title h1 {color:#009688;font-size:25px;font-weight:bold;}
+.login-form {background-color:rgba(255,255,255,1);border:1px solid #fff;border-radius:3px;padding:14px 20px;box-shadow:0 0 8px #eeeeee;transition: all 3s}
+.login-form .layui-form-item {position:relative;}
+.login-form .layui-form-item label {position:absolute;left:1px;top:1px;width:38px;line-height:36px;text-align:center;color:#d2d2d2;}
+.login-form .layui-form-item input {padding-left:36px;}
+.captcha {width:60%;display:inline-block;}
+.captcha-img {display:inline-block;width:34%;float:right;}
+.captcha-img img {height:34px;border:1px solid #e6e6e6;height:36px;width:100%;}
+#first_head{
+    cursor: pointer;
+    transition: all 3s;
+}
+.login-form:hover{
+    transition: all 3s;
+    border:1px solid #a8c0ff;
+    border-radius:8px;
+    padding:14px 20px;
+    background-color: rgba(255,255,255,.2);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px #fff;
+}
+.login-form:hover #first_head{
+    color: white;
+}
+.layui-btn-fluid{
+    width: 100%;
+    border: 1px;
+    vertical-align:top;
+}
+#light{
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    padding: 0px 18px;
+    background: #009688;
+    border: 1px;
+    border-radius: 2px;
+    color: white;
+}
+#light:hover {
+    transition: all 0.5s;
+    cursor: pointer;
+    background-color: rgb(11,142,120);
+}
