@@ -103,7 +103,7 @@
                         </dd>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4"
-                               data-tab="customer_loss/index" target="_self"><i class="fa fa-user-times"></i><span
+                               data-tab="goods/index" target="_self"><i class="fa fa-user-times"></i><span
                                         class="layui-left-nav"> 当前库存查询</span></a>
                         </dd>
                     </dl>
@@ -218,18 +218,9 @@
                         <dd class="">
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-12"
                                data-tab="role/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 系统日志</span></a>
+                                        class="layui-left-nav"> 菜单管理</span></a>
                         </dd>
-                        <dd class="">
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-13"
-                               data-tab="module/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 修改密码</span></a>
-                        </dd>
-                        <dd class="">
-                            <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-13"
-                               data-tab="module/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 安全退出</span></a>
-                        </dd>
+
                     </dl>
                 </li>
                 <span class="layui-nav-bar" style="top: 201px; height: 0px; opacity: 0;"></span>
