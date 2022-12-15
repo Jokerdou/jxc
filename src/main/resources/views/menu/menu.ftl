@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh">
+<html lang="">
 <head>
     <title></title>
     <#include "../common.ftl">

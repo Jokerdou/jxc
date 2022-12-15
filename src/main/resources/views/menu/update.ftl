@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="">
 <head>
     <#include "../common.ftl">
     <title>更新资源</title>
