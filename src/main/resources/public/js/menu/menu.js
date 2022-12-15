@@ -18,7 +18,7 @@ layui.use(['table', 'treetable'], () => {
             {type: 'numbers'},
             {field: 'menuId', width: 120, title: '菜单Id'},
             {
-                field: 'menuState', width: 80, align: 'center',
+                field: 'menuState', width: 120, align: 'center',
                 templet({menuState}) {
                     if (menuState === 0) {
                         return '<span class="layui-badge layui-bg-blue">目录</span>';
@@ -30,9 +30,9 @@ layui.use(['table', 'treetable'], () => {
                     }
                 }, title: '类型',
             },
-            {field: 'menuName', minWidth: 100, title: '菜单名称'},
+            {field: 'menuName', minWidth: 100, align: 'center', title: '菜单名称'},
             {field: 'menuUrl', title: '菜单url'},
-            {templet: '#perform-action', width: 240, align: 'center', title: '操作'}
+            {templet: '#perform-action', minWidth: 240, align: 'center', title: '操作'}
         ]],
         done() {
             layer.closeAll('loading');
