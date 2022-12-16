@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxx.erp.dao.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.xxxx.erp.vo.Menu">
+        <id column="menu_id" jdbcType="INTEGER" property="menuId"/>
+        <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
+        <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="p_id" jdbcType="INTEGER" property="pId"/>
+        <result column="menu_state" jdbcType="INTEGER" property="menuState"/>
+        <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
+        <result column="opt_value" jdbcType="VARCHAR" property="optValue"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        menu_id, menu_icon, menu_name, p_id, menu_state, menu_url, opt_value
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_menu
+        where menu_id = #{menuId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_menu
+        where menu_id = #{menuId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.xxxx.erp.vo.Menu">
+        insert into t_menu (menu_id, menu_icon, menu_name,
+        p_id, menu_state, menu_url,
+        opt_value)
+        values (#{menuId,jdbcType=INTEGER}, #{menuIcon,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR},
+        #{pId,jdbcType=INTEGER}, #{menuState,jdbcType=INTEGER}, #{menuUrl,jdbcType=VARCHAR},
+        #{optValue,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xxxx.erp.vo.Menu">
+        insert into t_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+                menu_id,
+            </if>
+            <if test="menuIcon != null">
+                menu_icon,
+            </if>
+            <if test="menuName != null">
+                menu_name,
+            </if>
+            <if test="pId != null">
+                p_id,
+            </if>
+            <if test="menuState != null">
+                menu_state,
+            </if>
+            <if test="menuUrl != null">
+                menu_url,
+            </if>
+            <if test="optValue != null">
+                opt_value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">
+                #{menuId,jdbcType=INTEGER},
+            </if>
+            <if test="menuIcon != null">
+                #{menuIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="menuName != null">
+                #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                #{pId,jdbcType=INTEGER},
+            </if>
+            <if test="menuState != null">
+                #{menuState,jdbcType=INTEGER},
+            </if>
+            <if test="menuUrl != null">
+                #{menuUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="optValue != null">
+                #{optValue,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.erp.vo.Menu">
+        update t_menu
+        <set>
+            <if test="menuIcon != null">
+                menu_icon = #{menuIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="menuName != null">
+                menu_name = #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null">
+                p_id = #{pId,jdbcType=INTEGER},
+            </if>
+            <if test="menuState != null">
+                menu_state = #{menuState,jdbcType=INTEGER},
+            </if>
+            <if test="menuUrl != null">
+                menu_url = #{menuUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="optValue != null">
+                opt_value = #{optValue,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where menu_id = #{menuId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xxxx.erp.vo.Menu">
+        update t_menu
+        set menu_icon  = #{menuIcon,jdbcType=VARCHAR},
+            menu_name  = #{menuName,jdbcType=VARCHAR},
+            p_id       = #{pId,jdbcType=INTEGER},
+            menu_state = #{menuState,jdbcType=INTEGER},
+            menu_url   = #{menuUrl,jdbcType=VARCHAR},
+            opt_value  = #{optValue,jdbcType=VARCHAR}
+        where menu_id = #{menuId,jdbcType=INTEGER}
+    </update>
+
+    <select id="queryMenuList" resultType="com.xxxx.erp.vo.Menu">
+        select
+        <include refid="Base_Column_List"/>
+        from t_menu
+    </select>
+    <!-- 通过层级与模块名查询资源对象 -->
+    <select id="queryMenuByMenuStateAndMenuName" resultType="com.xxxx.erp.vo.Menu">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_menu
+        where menu_state = #{menuState} and menu_name = #{menuName}
+    </select>
+
+    <!-- 通过层级与URL查询资源对象 -->
+    <select id="queryMenuByMenuStateAndMenuUrl" resultType="com.xxxx.erp.vo.Menu">
+        select
+        <include refid="Base_Column_List"/>
+        from t_menu
+        where menu_state = #{menuState} and menu_url = #{menuUrl}
+    </select>
+
+    <!-- 通过权限码查询资源对象 -->
+    <select id="queryMenuByOptValue" resultType="com.xxxx.erp.vo.Menu">
+        select
+        <include refid="Base_Column_List"/>
+        from t_menu
+        where opt_value = #{optValue}
+    </select>
+
+    <!-- 查询指定资源是否存在子记录 -->
+    <select id="queryMenuBypId" parameterType="int" resultType="java.lang.Integer">
+        select count(1)
+        from t_menu
+        where p_id = #{pId}
+    </select>
+    <select id="countRecordBypId" parameterType="int" resultType="java.lang.Integer">
+        select count(1)
+        from t_menu
+        where menu_id = #{menuId}
+    </select>
+
+    <!-- 查询所有的资源列表 -->
+    <select id="queryAllModules" resultType="com.xxxx.erp.model.TreeModel">
+    select
+        menu_id, p_id as pId, menu_name as name
+    from
+        t_menu
+    where
+        is_valid = 1
+  </select>
+</mapper>

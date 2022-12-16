@@ -2,22 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxxx.erp.dao.UserMapper">
   <sql id="Base_Column_List">
-    user_id, user_name, password, true_name, roles, remarks
+    user_id, user_name, password, true_name, remarks
   </sql>
   <resultMap id="BaseResultMap" type="com.xxxx.erp.vo.User">
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="true_name" jdbcType="VARCHAR" property="trueName" />
-    <result column="roles" jdbcType="VARCHAR" property="roles" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <insert id="insert" parameterType="com.xxxx.erp.vo.User">
     insert into t_user (user_id, user_name, password, 
-      true_name, roles, remarks
+      true_name, remarks
       )
     values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{trueName,jdbcType=VARCHAR}, #{roles,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      #{trueName,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xxxx.erp.vo.User">
@@ -34,9 +33,6 @@
       </if>
       <if test="trueName != null">
         true_name,
-      </if>
-      <if test="roles != null">
-        roles,
       </if>
       <if test="remarks != null">
         remarks,
@@ -55,9 +51,6 @@
       <if test="trueName != null">
         #{trueName,jdbcType=VARCHAR},
       </if>
-      <if test="roles != null">
-        #{roles,jdbcType=VARCHAR},
-      </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
       </if>
@@ -67,11 +60,11 @@
     select 
     <include refid="Base_Column_List" />
     from t_user
-    where user_id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_user
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.erp.vo.User">
     update t_user
@@ -79,41 +72,68 @@
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="userPwd != null">
-        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="trueName != null">
         true_name = #{trueName,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="isValid != null">
-        is_valid = #{isValid,jdbcType=INTEGER},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateDate != null">
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xxxx.erp.vo.User">
     update t_user
     set user_name = #{userName,jdbcType=VARCHAR},
-      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       true_name = #{trueName,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      is_valid = #{isValid,jdbcType=INTEGER},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+      remarks = #{remarks,jdbcType=VARCHAR},
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
+    <!--通过用户名查询用户记录,返回用户对象-->
+  <select id="queryUserByName" parameterType="string" resultType="com.xxxx.erp.vo.User">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_user
+        where
+            user_name = #{userName}
+  </select>
+
+  <!-- 多条件查询 -->
+  <select id="selectByParams" parameterType="com.xxxx.erp.query.UserQuery" resultType="com.xxxx.erp.vo.User">
+    select
+    <include refid="Base_Column_List"></include>
+    from
+    t_user
+    <where>
+      <!-- 用户名查询 -->
+      <if test="null != userName and userName != ''">
+        and user_name like concat('%',#{userName},'%')
+      </if>
+      <!-- 邮箱查询 -->
+      <if test="null != remarks and remarks != ''">
+        and remarks like concat('%',#{remarks},'%')
+      </if>
+
+    </where>
+  </select>
+
+  <!-- 删除用户 -->
+  <delete id="deleteBatch">
+    delete from
+    t_user
+    where
+    user_id
+    in
+    <foreach collection="array" item="userId" open="(" close=")" separator=",">
+      #{userId}
+    </foreach>
+  </delete>
+
+
 
 </mapper>

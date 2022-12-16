@@ -5,7 +5,8 @@
 
 <generatorConfiguration>
     <!--数据库驱动-->
-    <classPathEntry location="E:\m2\repository\mysql\mysql-connector-java\8.0.30\mysql-connector-java-8.0.30.jar"/>
+    <classPathEntry
+            location="D:\installpath\apache-maven-3.8.6\repository\mysql\mysql-connector-java\8.0.30\mysql-connector-java-8.0.30.jar"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
 
@@ -19,7 +20,7 @@
                 driverClass="com.mysql.cj.jdbc.Driver"
                 connectionURL="jdbc:mysql://127.0.0.1:3306/jxc?serverTimezone=GMT%2B8"
                 userId="root"
-                password="root">
+                password="ming1234.">
         </jdbcConnection>
 
         <javaTypeResolver>
