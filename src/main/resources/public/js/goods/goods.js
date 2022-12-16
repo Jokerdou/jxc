@@ -15,7 +15,7 @@ layui.use(['table', 'layer'], function () {
         // 单元格最小的宽度
         , cellMinWidth: 95
         // 访问数据的URL（后台的数据接口）
-        , url: ctx + '/supplier/list'
+        , url: ctx + '/goods/list'
         // 开启分页
         , page: true
         // 默认每页显示的数量
@@ -31,12 +31,15 @@ layui.use(['table', 'layer'], function () {
             // sort：是否允许排序（默认：false）
             // fixed：固定列
             {type: 'checkbox', fixed: 'center'}
-            , {field: 'supplierId', title: '编号', sort: true, fixed: 'left'}
-            , {field: 'supplierName', title: '供货商名称', align: 'center'}
-            , {field: 'contacts', title: '供货商联系人', align: 'center'}
-            , {field: 'phoneNumber', title: '联系人电话', align: 'center'}
-            , {field: 'address', title: '供货商地址', align: 'center'}
-            , {field: 'remarks', title: '备注', align: 'center'}
+            , {field: 'goodsId', title: '编号', sort: true, fixed: 'left'}
+            , {field: 'goodsCode', title: '商品编码', align: 'center'}
+            , {field: 'goodsName', title: '商品名称', align: 'center'}
+            , {field: 'goodsModel', title: '商品型号', align: 'center'}
+            , {field: 'goodsUnit', title: '商品单位', align: 'center'}
+            , {field: 'purchasingPrice', title: '采购价格', align: 'center'}
+            , {field: 'sellingPrice', title: '销售价格', align: 'center'}
+            , {field: 'minNum', title: '库存下限', align: 'center'}
+            , {field: 'remarks', title: '生产厂商', align: 'center'}
             , {title: '操作', templet: '#supplierListBar', fixed: 'right', align: 'center', minWidth: 150}
         ]]
     });
@@ -55,7 +58,7 @@ layui.use(['table', 'layer'], function () {
             // 设置需要传递给后端的参数
             where: { //设定异步数据接口的额外参数，任意设
                 // 通过文本框/下拉框的值，设置传递的参数
-                supplierName: $("[name='supplierName']").val() // 客户名称
+                goodsName: $("[name='goodsName']").val() // 客户名称
             }
             , page: {
                 curr: 1 // 重新从第 1 页开始
@@ -72,7 +75,7 @@ layui.use(['table', 'layer'], function () {
      *
             })
      */
-    table.on('toolbar(supplier)', function (data) {
+    table.on('toolbar(customer)', function (data) {
         // data.event：对应的元素上设置的lay-event属性值
         // console.log(data);
         // 判断对应的事件类型
@@ -91,17 +94,17 @@ layui.use(['table', 'layer'], function () {
      *      如果营销机会ID为空，则为添加操作
      *      如果营销机会ID不为空，则为修改操作
      */
-    function openSaleChanceDialog(supplierId) {
+    function openSaleChanceDialog(goodsId) {
         // 弹出层的标题
-        var title = "<h3>供货商管理 - 添加供货商信息</h3>";
-        var url = ctx + "/supplier/toSupplierPage";
+        var title = "<h3>客户管理 - 添加客户信息</h3>";
+        var url = ctx + "/goods/toGoodsPage";
 
         // 判断营销机会ID是否为空
-        if (supplierId != null && supplierId != '') {
+        if (goodsId != null && goodsId != '') {
             // 更新操作
-            title = "<h3>供货商管理 - 更新供货商信息</h3>";
+            title = "<h3>客户管理 - 更新客户信息</h3>";
             // 请求地址传递营销机会的ID
-            url += '?supplierId=' + supplierId;
+            url += '?goodsId=' + goodsId;
         }
 
         // iframe层
@@ -138,7 +141,7 @@ layui.use(['table', 'layer'], function () {
         }
 
         // 询问用户是否确认删除
-        layer.confirm('您确定要删除选中的记录吗？', {icon: 3, title: '供货商管理'}, function (index) {
+        layer.confirm('您确定要删除选中的记录吗？', {icon: 3, title: '商品管理'}, function (index) {
             // 关闭确认框
             layer.close(index);
             // 传递的参数是数组   ids=1&ids=2&ids=3
@@ -146,9 +149,9 @@ layui.use(['table', 'layer'], function () {
             // 循环选中的行记录的数据
             for (var i = 0; i < saleChanceData.length; i++) {
                 if (i < saleChanceData.length - 1) {
-                    ids = ids + saleChanceData[i].supplierId + "&ids="
+                    ids = ids + saleChanceData[i].goodsId + "&ids="
                 } else {
-                    ids = ids + saleChanceData[i].supplierId;
+                    ids = ids + saleChanceData[i].goodsId;
                 }
             }
             // console.log(ids);
@@ -156,7 +159,7 @@ layui.use(['table', 'layer'], function () {
             // 发送ajax请求，执行删除营销机会
             $.ajax({
                 type: "delete",
-                url: ctx + "/supplier/delete",
+                url: ctx + "/goods/delete",
                 data: ids, // 传递的参数是数组 ids=1&ids=2&ids=3
                 success: function (result) {
                     // 判断删除结果
@@ -176,34 +179,36 @@ layui.use(['table', 'layer'], function () {
     }
 
 
+
+
     /**
      * 行工具栏监听事件
      table.on('tool(数据表格的lay-filter属性值)', function (data) {
 
          });
      */
-    table.on('tool(supplier)', function (data) {
+    table.on('tool(customer)', function (data) {
          console.log(data);
         // 判断类型
         if (data.event == "edit") { // 编辑操作
 
             // 得到营销机会的ID
-            var supplierId = data.data.supplierId;
+            var goodsId = data.data.goodsId;
             // 打开修改营销机会数据的窗口
-            openSaleChanceDialog(supplierId)
+            openSaleChanceDialog(goodsId)
 
         } else if (data.event == "del") { // 删除操作
             // 弹出确认框，询问用户是否确认删除
-            layer.confirm('确定要删除该记录吗？', {icon: 3, title: "营销机会管理"}, function (index) {
+            layer.confirm('确定要删除该记录吗？', {icon: 3, title: "客户管理"}, function (index) {
                 // 关闭确认框
                 layer.close(index);
 
                 // 发送ajax请求，删除记录
                 $.ajax({
                     type: "delete",
-                    url: ctx + "/supplier/delete",
+                    url: ctx + "/goods/delete",
                     data: {
-                        ids: data.data.supplierId
+                        ids: data.data.goodsId
                     },
                     success: function (result) {
                         // 判断删除结果

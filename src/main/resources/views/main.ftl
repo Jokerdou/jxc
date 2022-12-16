@@ -244,21 +244,21 @@
                         <#if roleMenus?seq_contains("502")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11"
-                               data-tab="user/index" target="_self"><i class="fa fa-user"></i><span
+                               data-tab="customer/index" target="_self"><i class="fa fa-user"></i><span
                                         class="layui-left-nav"> 客户管理</span></a>
                         </dd>
                         </#if>
                         <#if roleMenus?seq_contains("503")>
                         <dd class="">
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-12"
-                               data-tab="role/index" target="_self"><i class="fa fa-tachometer"></i><span
+                               data-tab="goods/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 商品管理</span></a>
                         </dd>
                         </#if>
                         <#if roleMenus?seq_contains("504")>
                         <dd class="">
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-13"
-                               data-tab="module/index" target="_self"><i class="fa fa-tachometer"></i><span
+                               data-tab="stock/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 期初库存</span></a>
                         </dd>
                         </#if>
@@ -333,5 +333,23 @@
 </div>
 
 <script type="text/javascript" src="${ctx}/js/main.js"></script>
+<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+<!--小帅哥： https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json-->
+<!--萌娘：https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json-->
+<!--小可爱（女）：https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json-->
+<!--小可爱（男）：https://unpkg.com/live2d-widget-model-haruto@1.0.5/assets/haruto.model.json-->
+<!--初音：https://unpkg.com/live2d-widget-model-miku@1.0.5/assets/miku.model.json-->
+<!--水手服（女）https://unpkg.com/live2d-widget-model-z16@1.0.5/assets/z16.model.json-->
+<!--学生（女）https://unpkg.com/live2d-widget-model-tsumiki@1.0.5/assets/tsumiki.model.json-->
+<!--红衣美女（女）https://unpkg.com/live2d-widget-model-izumi@1.0.5/assets/izumi.model.json-->
+<!-- 上边的不同链接显示的是不同的小人，这个可以根据需要来选择 下边的初始化部分，可以修改宽高来修改小人的大小，或者是鼠标移动到小人上的透明度，也可以修改小人在页面出现的位置。 -->
+<script>
+    /*https://unpkg.com/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json*/
+    L2Dwidget.init({ "model": { jsonPath:
+                "https://unpkg.com/live2d-widget-model-izumi@1.0.5/assets/izumi.model.json",
+            "scale": 1 }, "display": { "position": "left", "width": 110, "height": 150,
+            "hOffset": 0, "vOffset": -20 }, "mobile": { "show": true, "scale": 0.5 },
+        "react": { "opacityDefault": 0.8, "opacityOnHover": 0.1 } });
+</script>
 </body>
 </html>

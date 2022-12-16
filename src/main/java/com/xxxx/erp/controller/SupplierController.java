@@ -24,7 +24,7 @@ public class SupplierController extends BaseController {
     private SupplierService supplierService;
 
     /**
-     * 进入客户管理页面
+     * 进入供货商管理页面
      * @return
      */
     @RequestMapping("index")
@@ -74,12 +74,17 @@ public class SupplierController extends BaseController {
     @RequestMapping("toSupplierPage")
     public String toSupplierPage(Integer supplierId,HttpServletRequest request){
         if(supplierId != null){
-        Supplier supplier= supplierService.selectByPrimaryKey(supplierId);
-        request.setAttribute("supplier",supplier);
+            Supplier supplier= supplierService.selectByPrimaryKey(supplierId);
+            request.setAttribute("supplier",supplier);
         }
         return "supplier/addSupplier";
     }
 
+    /**
+     * 删除供货商信息
+     * @param ids
+     * @return
+     */
     @DeleteMapping ("delete")
     @ResponseBody
     public ResultInfo deleteSupplierById(Integer[] ids){

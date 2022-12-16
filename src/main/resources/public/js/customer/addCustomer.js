@@ -10,7 +10,7 @@ layui.use(['form', 'layer'], function () {
 
         });
      */
-    form.on('submit(addOrUpdateSupplier)', function (data) {
+    form.on('submit(addOrUpdateCustomer)', function (data) {
 
         // 提交数据时的加载层 （https://layer.layui.com/）
         var index = layer.msg("数据提交中,请稍后...",{
@@ -20,16 +20,16 @@ layui.use(['form', 'layer'], function () {
         });
 
         // 发送ajax请求
-        var url = ctx + "/supplier/add"; // 添加操作
+        var url = ctx + "/customer/add"; // 添加操作
 
         // 通过营销机会的ID来判断当前需要执行添加操作还是修改操作
         // 如果营销机会的ID为空，则表示执行添加操作；如果ID不为空，则表示执行更新操作
         // 通过获取隐藏域中的ID
-        var supplierId = $("[name='supplierId']").val();
+        var customerId = $("[name='customerId']").val();
         // 判断ID是否为空
-        if (supplierId != null && supplierId != '') {
+        if (customerId != null && customerId != '') {
             // 更新操作
-            url = ctx + "/supplier/update";
+            url = ctx + "/customer/update";
         }
 
         $.post(url, data.field, function (result) {
