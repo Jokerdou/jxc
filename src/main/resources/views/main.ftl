@@ -276,8 +276,7 @@
                                data-tab="role/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 角色管理</span></a>
                         </dd>
-<#--                        </#if>-->
-<#--                        <#-->
+
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11"
                                data-tab="user/index" target="_self"><i class="fa fa-user"></i><span
