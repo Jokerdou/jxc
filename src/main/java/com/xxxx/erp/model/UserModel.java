@@ -1,9 +1,10 @@
 package com.xxxx.erp.model;
 
 public class UserModel {
-    private Integer userId;
     private String userName;
     private String trueName;
+    private Integer userId;
+    private String userIdStr;
 
     public Integer getUserId() {
         return userId;
@@ -27,5 +28,13 @@ public class UserModel {
 
     public void setTrueName(String trueName) {
         this.trueName = trueName;
+    }
+
+    public String getUserIdStr() {
+        return userIdStr;
+    }
+
+    public void setUserIdStr(String userIdStr) {
+        this.userIdStr = userIdStr;
     }
 }
