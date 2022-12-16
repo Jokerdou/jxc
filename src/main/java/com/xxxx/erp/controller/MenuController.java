@@ -2,6 +2,7 @@ package com.xxxx.erp.controller;
 
 import com.xxxx.erp.base.BaseController;
 import com.xxxx.erp.base.ResultInfo;
+import com.xxxx.erp.model.TreeModel;
 import com.xxxx.erp.service.MenuService;
 import com.xxxx.erp.vo.Menu;
 import org.springframework.stereotype.Controller;
@@ -12,19 +13,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 /**
  * 菜单控制层
  */
 @Controller
-@RequestMapping("/menu")
+@RequestMapping("menu")
 public class MenuController extends BaseController {
     /**
      * 菜单服务
      */
     @Resource
     private MenuService menuService;
+
+    //查询所有的资源列表
+    @RequestMapping("queryAllModules")
+    @ResponseBody
+    public List<TreeModel> queryAllModules(Integer roleId){
+
+        return menuService.queryAllModules(roleId);
+    }
+
+    //进入授权页面
+    @RequestMapping("toAddGrantPage")
+    public String toAddGrantPage(Integer roleId,HttpServletRequest request){
+        // 将需要授权的角色ID设置到请求域中
+        request.setAttribute("roleId",roleId);
+        return "role/grant";
+    }
 
     /**
      * 查询菜单列表

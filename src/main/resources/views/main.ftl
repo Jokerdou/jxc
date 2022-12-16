@@ -45,171 +45,239 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll layui-left-menu">
+            <#-- 判断当前登录用户是否拥有权限 -->
+            <#if roleMenus??>
             <ul class="layui-nav layui-nav-tree layui-left-nav-tree layui-this" id="currency">
+                <#-- 通过freemarker中的seq_contains内建指令判断菜单是否显示 -->
+                <#if roleMenus?seq_contains("100")>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-street-view"></i><span
                                 class="layui-left-nav"> 进货管理</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
+                        <#if roleMenus?seq_contains("101")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-1"
                                data-tab="sale_chance/index" target="_self"><i class="fa fa-tty"></i><span
                                         class="layui-left-nav"> 进货入库</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("102")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-2"
                                data-tab="cus_dev_plan/index" target="_self"><i class="fa fa-ellipsis-h"></i><span
                                         class="layui-left-nav"> 退货出库</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("103")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-2"
                                data-tab="cus_dev_plan/index" target="_self"><i class="fa fa-ellipsis-h"></i><span
                                         class="layui-left-nav"> 进货单据查询</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("104")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-2"
                                data-tab="cus_dev_plan/index" target="_self"><i class="fa fa-ellipsis-h"></i><span
                                         class="layui-left-nav"> 退货单据查询</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("105")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-2"
                                data-tab="cus_dev_plan/index" target="_self"><i class="fa fa-ellipsis-h"></i><span
                                         class="layui-left-nav"> 当前库存查询</span></a>
                         </dd>
+                        </#if>
                     </dl>
                 </li>
+                </#if>
+                <#if roleMenus?seq_contains("20")>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-flag"></i><span
                                 class="layui-left-nav"> 销售管理</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
+                        </#if>
+                        <#if roleMenus?seq_contains("201")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-3"
                                data-tab="customer/index" target="_self"><i class="fa fa-exchange"></i><span
                                         class="layui-left-nav"> 销售出库</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("202")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4"
                                data-tab="customer_loss/index" target="_self"><i class="fa fa-user-times"></i><span
                                         class="layui-left-nav"> 客户退货</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("203")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4"
                                data-tab="customer_loss/index" target="_self"><i class="fa fa-user-times"></i><span
                                         class="layui-left-nav"> 销售单据查询</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("204")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4"
                                data-tab="customer_loss/index" target="_self"><i class="fa fa-user-times"></i><span
                                         class="layui-left-nav"> 客户退货查询</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("205")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-4"
                                data-tab="customer_loss/index" target="_self"><i class="fa fa-user-times"></i><span
                                         class="layui-left-nav"> 当前库存查询</span></a>
                         </dd>
+                        </#if>
                     </dl>
                 </li>
+                </#if>
+                <#if roleMenus?seq_contains("30")>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-desktop"></i><span
                                 class="layui-left-nav"> 库存管理</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
+                        <#if roleMenus?seq_contains("301")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-5"
                                data-tab="customer_serve/index/1" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 商品报损</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("302")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-6"
                                data-tab="customer_serve/index/2" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 商品报溢</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("303")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-7"
                                data-tab="customer_serve/index/3" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 库存报警</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("304")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-8"
                                data-tab="customer_serve/index/4" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 报损报溢查询</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("305")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-9"
                                data-tab="customer_serve/index/5" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 当前库存查询</span></a>
                         </dd>
+                        </#if>
                     </dl>
                 </li>
+                </#if>
+                <#if roleMenus?seq_contains("40")>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-home"></i><span
                                 class="layui-left-nav"> 统计报表</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
+                        <#if roleMenus?seq_contains("401")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
                                data-tab="report/0" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 供应商统计</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("402")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
                                data-tab="report/1" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 客户统计</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("403")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
                                data-tab="sale_chance/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 商品采购统计</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("404")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
                                data-tab="report/3" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 商品销售统计</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("405")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
                                data-tab="report/3" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 按日统计分析</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("406")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
                                data-tab="report/3" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 商品销售统计</span></a>
                         </dd>
+                        </#if>
                     </dl>
                 </li>
+                </#if>
+                <#if roleMenus?seq_contains("50")>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-gears"></i><span
                                 class="layui-left-nav">基础资料</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
+                        <#if roleMenus?seq_contains("501")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
                                data-tab="supplier/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 供应商管理</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("502")>
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11"
                                data-tab="user/index" target="_self"><i class="fa fa-user"></i><span
                                         class="layui-left-nav"> 客户管理</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("503")>
                         <dd class="">
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-12"
                                data-tab="role/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 商品管理</span></a>
                         </dd>
+                        </#if>
+                        <#if roleMenus?seq_contains("504")>
                         <dd class="">
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-13"
                                data-tab="module/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 期初库存</span></a>
                         </dd>
+                        </#if>
                     </dl>
                 </li>
+                </#if>
+<#--                <#if roleMenus?seq_contains("60")>-->
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="layui-menu-tips"><i class="fa fa-gears"></i><span
                                 class="layui-left-nav"> 系统管理</span> <span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
+<#--                        <#if roleMenus?seq_contains("601")>-->
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-10"
-                               data-tab="data_dic/index" target="_self"><i class="fa fa-tachometer"></i><span
+                               data-tab="role/index" target="_self"><i class="fa fa-tachometer"></i><span
                                         class="layui-left-nav"> 角色管理</span></a>
                         </dd>
+<#--                        </#if>-->
+<#--                        <#-->
                         <dd>
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-11"
                                data-tab="user/index" target="_self"><i class="fa fa-user"></i><span
@@ -217,8 +285,8 @@
                         </dd>
                         <dd class="">
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-12"
-                               data-tab="role/index" target="_self"><i class="fa fa-tachometer"></i><span
-                                        class="layui-left-nav"> 系统日志</span></a>
+                               data-tab="menu/index" target="_self"><i class="fa fa-tachometer"></i><span
+                                        class="layui-left-nav">菜单管理</span></a>
                         </dd>
                         <dd class="">
                             <a href="javascript:;" class="layui-menu-tips" data-type="tabAdd" data-tab-mpi="m-p-i-13"

@@ -1,12 +1,16 @@
 package com.xxxx.erp.dao;
 
 import com.xxxx.erp.base.BaseMapper;
+import com.xxxx.erp.model.TreeModel;
 import com.xxxx.erp.vo.Menu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface MenuMapper extends BaseMapper<Menu, Integer> {
+
+    // 查询所有的资源列表
+    public List<TreeModel> queryAllModules();
 
     /**
      * 查询所有的资源数据

@@ -2,6 +2,8 @@ package com.xxxx.erp.service;
 
 import com.xxxx.erp.base.BaseService;
 import com.xxxx.erp.dao.MenuMapper;
+import com.xxxx.erp.dao.RoleMenuMapper;
+import com.xxxx.erp.model.TreeModel;
 import com.xxxx.erp.utils.AssertUtil;
 import com.xxxx.erp.vo.Menu;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,29 @@ public class MenuService extends BaseService<Menu, Integer> {
      */
     @Resource
     private MenuMapper menuMapper;
+
+    @Resource
+    private RoleMenuMapper roleMenuMapper;
+
+    //查询所有资源列表
+    public List<TreeModel> queryAllModules(Integer roleId){
+        // 查询所有的资源列表
+        List<TreeModel> treeModelList = menuMapper.queryAllModules();
+        // 查询指定角色已经授权过的资源列表 (查询角色拥有的资源ID)
+        List<Integer> roleMenuIds = roleMenuMapper.queryRoleHasModuleIdsByRoleId(roleId);
+        // 判断角色是否拥有资源ID
+        if (roleMenuIds != null && roleMenuIds.size() > 0){
+            // 循环所有的资源列表，判断用户拥有的资源ID中是否有匹配的，如果有，则设置checked属性为true
+            treeModelList.forEach(treeModel -> {
+                // 判断角色拥有的资源ID中是否有当前遍历的资源ID
+                if (roleMenuIds.contains(treeModel.getId())){
+                    // 如果包含你，则说明角色授权过，设置checked为true
+                    treeModel.setChecked(true);
+                }
+            });
+        }
+        return treeModelList;
+    }
 
     /**
      * 查询菜单列表

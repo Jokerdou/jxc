@@ -9,7 +9,8 @@ public class User {
 
     private String trueName;
 
-    private String roles;
+    private String roleIds;
+
 
     private String remarks;
 
@@ -44,20 +45,19 @@ public class User {
     public void setTrueName(String trueName) {
         this.trueName = trueName == null ? null : trueName.trim();
     }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles == null ? null : roles.trim();
-    }
-
     public String getRemarks() {
         return remarks;
     }
 
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public String getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
     }
 }

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxxx.erp.dao.RoleMenuMapper" >
+    <resultMap id="BaseResultMap" type="com.xxxx.erp.vo.RoleMenu" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="role_id" property="roleId" jdbcType="INTEGER" />
+        <result column="menu_id" property="menuId" jdbcType="INTEGER" />
+        <result column="acl_value" property="aclValue" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, role_id, module_id, acl_value,
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from t_role_menu
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_role_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.xxxx.erp.vo.RoleMenu" >
+    insert into t_role_menu (id, role_id, menu_id,
+      acl_value
+      )
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER},
+      #{aclValue,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.xxxx.erp.vo.RoleMenu" >
+        insert into t_role_menu
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="roleId != null" >
+                role_id,
+            </if>
+            <if test="moduleId != null" >
+                menu_id,
+            </if>
+            <if test="aclValue != null" >
+                acl_value,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null" >
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="moduleId != null" >
+                #{menuId,jdbcType=INTEGER},
+            </if>
+            <if test="aclValue != null" >
+                #{aclValue,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xxxx.erp.vo.RoleMenu" >
+        update t_role_menu
+        <set >
+            <if test="roleId != null" >
+                role_id = #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="menuId != null" >
+                menu_id = #{menuId,jdbcType=INTEGER},
+            </if>
+            <if test="aclValue != null" >
+                acl_value = #{aclValue,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xxxx.erp.vo.RoleMenu" >
+    update t_role_menu
+    set role_id = #{roleId,jdbcType=INTEGER},
+      menu_id = #{menuId,jdbcType=INTEGER},
+      acl_value = #{aclValue,jdbcType=VARCHAR},
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <!-- 通过角色ID查询权限记录 -->
+    <select id="countPermissionByRoleId" parameterType="int" resultType="java.lang.Integer">
+    select
+        count(1)
+    from
+        t_role_menu
+    where
+        role_id = #{roleId}
+  </select>
+
+
+    <!-- 通过角色ID删除权限记录 -->
+    <delete id="deletePermissionByRoleId" parameterType="int">
+    delete from
+        t_role_menu
+    where
+        role_id = #{roleId}
+  </delete>
+
+    <!-- 批量添加 -->
+    <insert id="insertBatch">
+        insert  into
+        t_role_menu (role_id,menu_id,acl_value)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.roleId},#{item.menuId},#{item.aclValue}
+        </foreach>
+    </insert>
+
+    <!-- 查询角色拥有的所有的资源ID的集合 -->
+    <select id="queryRoleHasModuleIdsByRoleId" parameterType="int" resultType="java.lang.Integer">
+    select
+        menu_id
+    from
+        t_role_menu
+    where
+        role_id = #{roleId}
+  </select>
+
+    <!-- 通过用户ID查询对应的资源列表（资源权限码） -->
+    <select id="queryUserHasRoleHasPermissionByUserId" parameterType="int" resultType="java.lang.String">
+    SELECT DISTINCT
+        acl_value
+    FROM
+        t_user_role ur
+        LEFT JOIN t_role_menu p ON ur.role_id = p.role_id
+    WHERE
+        ur.user_id = #{userId}
+  </select>
+
+
+    <!-- 通过资源ID查询权限记录 -->
+    <select id="countPermissionByModuleId" parameterType="int" resultType="java.lang.Integer">
+    select
+        count(1)
+    from
+        t_role_menu
+    where
+        menu_id=#{menuId}
+  </select>
+
+    <!-- 通过资源ID删除权限记录 -->
+    <delete id="deletePermissionByModuleId" parameterType="int">
+    delete from
+        t_role_menu
+    where
+        menu_id=#{menuId}
+  </delete>
+
+</mapper>

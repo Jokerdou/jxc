@@ -1,6 +1,7 @@
 package com.xxxx.erp.controller;
 
 import com.xxxx.erp.base.BaseController;
+import com.xxxx.erp.service.RoleMenuService;
 import com.xxxx.erp.service.UserService;
 import com.xxxx.erp.utils.LoginUserUtil;
 import com.xxxx.erp.vo.User;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author WongFaaCoi
@@ -20,6 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController extends BaseController {
     @Resource
     private UserService userService;
+
+    @Resource
+    private RoleMenuService roleMenuService;
     /**
      * 系统登录页
      * @return
@@ -43,11 +48,14 @@ public class IndexController extends BaseController {
     public String main(HttpServletRequest request){
         //在跳转到main主页之前，先获得user对象，设置到session作用域中，不然前台页面无法显示登陆者的用户信息
         //1、先通过一个工具类，通过request对象获取到cookie的用户加密id，对id进行解密（再改工具类中已经完成解密）
-        int userId = LoginUserUtil.releaseUserIdFromCookie(request);
+        Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
         //2、由于UserService extends BaseService，所以注入由于UserService可直接使用BaseService对象的方法
         User user = userService.selectByPrimaryKey(userId);
         //3、将user设置到session作用域中
         request.getSession().setAttribute("user", user);
+        // 通过当前登录用户ID查询当前登录用户拥有的资源列表 （查询对应资源的授权码）
+        List<String> roleMenus = roleMenuService.queryUserHasRoleHasPermissionByUserId(userId);
+        request.getSession().setAttribute("roleMenus",roleMenus);
         return "main";
     }
 }
